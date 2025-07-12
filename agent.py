@@ -57,11 +57,18 @@ def sql_engine(query: str) -> str:
     """
     Allows you to perform SQL queries on the table. Returns a string representation of the result.
     The table name is "Receipts" and its description is as follows:
-    Columns:
+
+    Tables:
+
+    Receipts:
     - receipt_id: INTEGER
     - customer_name: VARCHAR(16)
     - price: FLOAT
     - tip: FLOAT
+
+    Waiters:
+    - receipt_id: INTEGER (Foreign key to Receipts.receipt_id)
+    - waiter_name: VARCHAR(16)
 
     Args:
         query: The query to perform. This must be correct SQL.
