@@ -1,4 +1,5 @@
 from dotenv import load_dotenv
+from smolagents import tool
 from sqlalchemy import (
     create_engine,
     MetaData,
@@ -50,3 +51,24 @@ inspector = inspect(engine)
 columns_info = [(col["name"], col["type"]) for col in inspector.get_columns("receipts")]
 table_description = "Columns:\n" + "\n".join([f" - {name}: {col_type}" for name, col_type in columns_info])
 print(table_description)
+
+@tool
+def sql_engine(query: str) -> str:
+    """
+    Allows you to perform SQL queries on the table. Returns a string representation of the result.
+    The table name is "Receipts" and its description is as follows:
+    Columns:
+    - receipt_id: INTEGER
+    - customer_name: VARCHAR(16)
+    - price: FLOAT
+    - tip: FLOAT
+
+    Args:
+        query: The query to perform. This must be correct SQL.
+    """
+    output = ""
+    with engine.connect() as connection:
+        rows = connection.execute(text(query))
+        for row in rows:
+            output += "\n" + str(row)
+    return output
