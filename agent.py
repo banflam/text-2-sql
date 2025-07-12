@@ -34,3 +34,14 @@ receipts = Table(
     Column("price", Float),
     Column("tip", Float),
 )    
+
+metadata_obj.create_all(engine)
+
+rows = [
+    {"receipt-id": 1, "customer_name": "Alan Payne", "price": 12.06, "tip": 1.20},
+    {"receipt-id": 2, "customer_name": "Alex Mason", "price": 23.86, "tip": 0.24},
+    {"receipt-id": 3, "customer_name": "Woodrow Wilson", "price": 53.43, "tip": 5.43},
+    {"receipt-id": 4, "customer_name": "Margaret James", "price": 21.11, "tip": 1.00},
+]
+
+insert_rows_into_table(rows, receipts)
