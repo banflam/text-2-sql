@@ -31,7 +31,7 @@ receipts = Table(
     table_name,
     metadata_obj,
     Column("receipt_id", Integer, primary_key=True),
-    Column("customer_name", String(16), primary_key=True),
+    Column("customer_name", String(16)),
     Column("price", Float),
     Column("tip", Float),
 )    
@@ -39,10 +39,10 @@ receipts = Table(
 metadata_obj.create_all(engine)
 
 rows = [
-    {"receipt-id": 1, "customer_name": "Alan Payne", "price": 12.06, "tip": 1.20},
-    {"receipt-id": 2, "customer_name": "Alex Mason", "price": 23.86, "tip": 0.24},
-    {"receipt-id": 3, "customer_name": "Woodrow Wilson", "price": 53.43, "tip": 5.43},
-    {"receipt-id": 4, "customer_name": "Margaret James", "price": 21.11, "tip": 1.00},
+    {"receipt_id": 1, "customer_name": "Alan Payne", "price": 12.06, "tip": 1.20},
+    {"receipt_id": 2, "customer_name": "Alex Mason", "price": 23.86, "tip": 0.24},
+    {"receipt_id": 3, "customer_name": "Woodrow Wilson", "price": 53.43, "tip": 5.43},
+    {"receipt_id": 4, "customer_name": "Margaret James", "price": 21.11, "tip": 1.00},
 ]
 
 insert_rows_into_table(rows, receipts)
@@ -78,4 +78,4 @@ agent = CodeAgent(
     model = InferenceClientModel(model_id="meta-llama/Llama-3.1-8B-Instruct")
 )
 
-agent.run("Can you give me the name of the client who got the most expensive receipt?")
+agent.run("Can you give me the receipt id of the most expensive receipt?")
