@@ -45,3 +45,8 @@ rows = [
 ]
 
 insert_rows_into_table(rows, receipts)
+
+inspector = inspect(engine)
+columns_info = [(col["name"], col["type"]) for col in inspector.get_columns("receipts")]
+table_description = "Columns:\n" + "\n".join([f" - {name}: {col_type}" for name, col_type in columns_info])
+print(table_description)
