@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from smolagents import tool
+from smolagents import tool, CodeAgent, InferenceClientModel
 from sqlalchemy import (
     create_engine,
     MetaData,
@@ -72,3 +72,10 @@ def sql_engine(query: str) -> str:
         for row in rows:
             output += "\n" + str(row)
     return output
+
+agent = CodeAgent(
+    tools = [sql_engine],
+    model = InferenceClientModel(model_id="meta-llama/Llama-3.1-8B-Instruct")
+)
+
+agent.run("Can you give me the name of the client who got the most expensive receipt?")
