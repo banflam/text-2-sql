@@ -98,3 +98,10 @@ rows = [
 ]
 
 insert_rows_into_table(rows, waiters)
+
+sql_join_capable_agent = CodeAgent(
+    tools=[sql_engine],
+    model = InferenceClientModel(model_id="Qwen/Qwen2.5-Coder-32B-Instruct"),
+)
+
+agent.run("Which waiter got more money from tips?")
