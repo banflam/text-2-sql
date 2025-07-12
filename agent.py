@@ -79,3 +79,22 @@ agent = CodeAgent(
 )
 
 agent.run("Can you give me the receipt id of the most expensive receipt?")
+
+table_name = "waiters"
+waiters = Table(
+    table_name,
+    metadata_obj,
+    Column("receipt_id", Integer, primary_key=True),
+    Column("waiter_name", String(16)),
+)
+
+metadata_obj.create_all(engine)
+
+rows = [
+    {"receipt_id": 1, "waiter_name": "Corey Johnson"},
+    {"receipt_id": 2, "waiter_name": "Michael Watts"},
+    {"receipt_id": 3, "waiter_name": "Michael Watts"},
+    {"receipt_id": 4, "waiter_name": "Margaret James"},
+]
+
+insert_rows_into_table(rows, waiters)
