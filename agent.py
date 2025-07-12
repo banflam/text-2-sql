@@ -17,3 +17,12 @@ load_dotenv()
 engine = create_engine("sqlite:///:memory")
 metadata_obj = MetaData()
 
+def insert_rows_into_table(rows, table, engine=engine):
+
+    for row in rows:
+        stmt = insert(table).values(**row)
+        with engine.begin() as connection:
+            connection.execute(stmt)
+            
+
+    
