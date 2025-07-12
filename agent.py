@@ -104,4 +104,4 @@ sql_join_capable_agent = CodeAgent(
     model = InferenceClientModel(model_id="Qwen/Qwen2.5-Coder-32B-Instruct"),
 )
 
-agent.run("Which waiter got more money from tips?")
+sql_join_capable_agent.run("Which waiter got more money from tips?")
